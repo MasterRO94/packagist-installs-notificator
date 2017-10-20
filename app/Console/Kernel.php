@@ -28,7 +28,10 @@ class Kernel extends ConsoleKernel
 	protected function schedule(Schedule $schedule)
 	{
 		$schedule->command('package-installs:notify')->everyTenMinutes();
-		$schedule->command('package-installs:notify --test')->everyMinute();
+
+		$schedule->call(function () {
+			(new \App\Models\User(['email' => 'igoshin18@gmail.com']))->notify(new \App\Notifications\InstallsCountReachedNotification('test', 0));
+		})->everyMinute();
 	}
 
 

@@ -16,7 +16,7 @@ class NotifyInstalls extends Command
 	 *
 	 * @var string
 	 */
-	protected $signature = 'package-installs:notify {--test}';
+	protected $signature = 'package-installs:notify';
 
 	/**
 	 * The console command description.
@@ -49,11 +49,6 @@ class NotifyInstalls extends Command
 	 */
 	public function handle(): void
 	{
-
-		if ($this->option('test')) {
-			(new User(['email' => 'igoshin@gmail.com']))->notify(new InstallsCountReachedNotification('test', 0));
-		}
-
 		$this->readConfig();
 
 		foreach ($this->packages as $package) {
